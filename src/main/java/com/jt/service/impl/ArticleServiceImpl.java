@@ -2,6 +2,8 @@ package com.jt.service.impl;
 
 import com.jt.common.util.UserUtils;
 import com.jt.entity.Article;
+import com.jt.entity.Category;
+import com.jt.entity.Tag;
 import com.jt.entity.User;
 import com.jt.repository.ArticleRepository;
 import com.jt.service.ArticleService;
@@ -83,42 +85,73 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     @Override
+    @Transactional
     public Integer updateArticle(Article article) {
-        return 0;
+
+        Article oldArticle = articleRepository.getOne(article.getId());
+
+        oldArticle.setTitle(article.getTitle());
+        oldArticle.setSummary(article.getSummary());
+        oldArticle.setBody(article.getBody());
+        oldArticle.setCategory(article.getCategory());
+        oldArticle.setTags(article.getTags());
+
+        return oldArticle.getId();
+
+
+
+//        return 0;
     }
 
     @Override
+    @Transactional
     public void deleteArticle(Integer id) {
-
+        articleRepository.delete(id);
     }
 
     @Override
     public List<Article> listArticlesByTag(Integer tagId) {
-        return List.of();
+
+        Tag t = new Tag();
+        t.setId(tagId);
+
+        return articleRepository.findByTag(t);
+
+//        return List.of();
     }
 
     @Override
     public List<Article> listArticlesByCategory(Integer categoryId) {
-        return List.of();
+        Category c = new Category();
+
+        c.setId(categoryId);
+
+        return articleRepository.findByCategory(c);
+
+
     }
 
     @Override
+    @Transactional
     public Article getArticleAndAddViews(Integer id) {
-        return null;
+        int count = 1 ;
+        Article article = articleRepository.getOne(id);
+        article.setViewCounts(article.getViewCounts() + count);
+        return article;
     }
 
     @Override
     public List<Article> listHotArticles(int limit) {
-        return List.of();
+        return articleRepository.findOrderByViewsAndLimit(limit);
     }
 
     @Override
     public List<Article> listNewArticles(int limit) {
-        return List.of();
+        return articleRepository.findOrderByCreateDateAndLimit(limit);
     }
 
     @Override
     public List<ArticleVO> listArchives() {
-        return List.of();
+        return articleRepository.listArchives();
     }
 }
