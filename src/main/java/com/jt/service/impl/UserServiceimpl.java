@@ -4,6 +4,7 @@ import com.jt.entity.User;
 import com.jt.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Random;
@@ -11,6 +12,7 @@ import java.util.Random;
 import com.jt.common.util.PasswordHelper;
 import com.jt.service.UserService;
 
+@Service
 public class UserServiceimpl implements UserService{
 
     @Autowired
