@@ -115,7 +115,7 @@ public class ArticleServiceImpl implements ArticleService {
         Tag t = new Tag();
         t.setId(tagId);
 
-        return articleRepository.findByTag(t);
+        return articleRepository.findByTags(t);
 
 //        return List.of();
     }
