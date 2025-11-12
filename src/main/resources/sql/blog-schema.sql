@@ -11,7 +11,7 @@
 
  Date: 04/28/2018 09:14:32 AM
 */
-
+use blog;
 SET NAMES utf8;
 SET FOREIGN_KEY_CHECKS = 0;
 
