@@ -24,7 +24,7 @@ public class TagServiceImpl implements TagService {
 
     @Override
     public Tag getTagById(Integer id) {
-        return tagRepository.getOne(id);
+        return tagRepository.findById(id).orElse(null);
     }
 
     @Override
@@ -40,7 +40,7 @@ public class TagServiceImpl implements TagService {
     @Override
     @Transactional
     public Integer updateTag(Tag tag) {
-        Tag oldTag = tagRepository.getOne(tag.getId());
+        Tag oldTag = tagRepository.findById(tag.getId()).orElse(null);
 
         oldTag.setTagName(tag.getTagName());
         oldTag.setAvatar(tag.getAvatar());
@@ -53,7 +53,10 @@ public class TagServiceImpl implements TagService {
     @Override
     @Transactional
     public void deleteTagById(Integer id) {
-        tagRepository.delete(id);
+        Tag tag = tagRepository.findById(id).orElse(null);
+        if (tag != null) {
+            tagRepository.delete(tag);
+        }
     }
 
     @Override

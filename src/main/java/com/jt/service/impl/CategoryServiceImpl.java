@@ -27,7 +27,7 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public Category getCategoryById(Integer id) {
-        return categoryRepository.getOne(id);
+        return categoryRepository.findById(id).orElse(null);
 //        return null;
     }
 
@@ -57,7 +57,10 @@ public class CategoryServiceImpl implements CategoryService {
     @Override
     @Transactional
     public void deleteCategory(Integer id) {
-        categoryRepository.delete(id);
+        Category category = categoryRepository.findById(id).orElse(null);
+        if (category != null) {
+            categoryRepository.delete(category);
+        }
     }
 
     @Override

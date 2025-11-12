@@ -4,10 +4,9 @@ import com.alibaba.fastjson.annotation.JSONField;
 import com.jt.common.entity.BaseEntity;
 import org.hibernate.annotations.NotFound;
 import org.hibernate.annotations.NotFoundAction;
-import org.hibernate.validator.constraints.NotBlank;
-
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import java.util.Date;
 import java.util.List;
 

@@ -34,7 +34,7 @@ public class CommentServiceImpl implements CommentService {
 
     @Override
     public Comment getCommentById(Integer id) {
-        return commentRepository.getOne(id);
+        return commentRepository.findById(id).orElse(null);
     }
 
     @Override
@@ -48,7 +48,10 @@ public class CommentServiceImpl implements CommentService {
     @Override
     @Transactional
     public void deleteCommentById(Integer id) {
-        commentRepository.delete(id);
+        Comment comment = commentRepository.findById(id).orElse(null);
+        if (comment != null) {
+            commentRepository.delete(comment);
+        }
     }
 
     @Override
@@ -63,7 +66,7 @@ public class CommentServiceImpl implements CommentService {
     public Comment saveCommentAndChangeCounts(Comment comment) {
 
         int count = 1;
-        Article a = articleRepository.findOne(comment.getArticle().getId());
+        Article a = articleRepository.findById(comment.getArticle().getId()).orElse(null);
         a.setCommentCounts(a.getCommentCounts() + count);
 
         comment.setAuthor(UserUtils.getCurrentUser());
@@ -88,7 +91,7 @@ public class CommentServiceImpl implements CommentService {
     @Transactional
     public void deleteCommentByIdAndChangeCounts(Integer id) {
         int count = 1;
-        Comment c = commentRepository.findOne(id);
+        Comment c = commentRepository.findById(id).orElse(null);
         Article a = c.getArticle();
 
         a.setCommentCounts(a.getCommentCounts() - count);

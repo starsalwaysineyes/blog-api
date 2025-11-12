@@ -2,7 +2,7 @@ package com.jt.entity;
 
 import com.alibaba.fastjson.annotation.JSONField;
 import com.jt.common.entity.BaseEntity;
-import org.hibernate.validator.constraints.NotBlank;
+import javax.validation.constraints.NotBlank;
 
 import javax.persistence.*;
 

@@ -9,7 +9,7 @@ import com.jt.common.result.Result;
 import com.jt.common.util.UserUtils;
 import com.jt.entity.User;
 import com.jt.service.UserService;
-import org.apache.catalina.servlet4preview.http.HttpServletRequest;
+import javax.servlet.http.HttpServletRequest;
 import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
