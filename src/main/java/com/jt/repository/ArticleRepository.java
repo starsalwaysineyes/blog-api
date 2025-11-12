@@ -12,7 +12,7 @@ import java.util.List;
 
 public interface ArticleRepository extends JpaRepository<Article, Integer> , ArticleWrapper {
 
-    List<Article> findByTag(Tag tag);
+    List<Article> findByTags(Tag tag);
 
     List<Article> findByCategory(Category category);
 
