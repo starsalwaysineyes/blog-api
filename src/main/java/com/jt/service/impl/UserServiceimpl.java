@@ -37,7 +37,8 @@ public class UserServiceimpl implements UserService{
     @Override
     @Transactional
     public Long saveUser(User user) {
-        PasswordHelper passwordHelper = new PasswordHelper();
+        // 使用静态方法而不是实例化工具类
+        PasswordHelper.encryptPassword(user);
 
         int index = new Random().nextInt(6)+1;
         String avatar = "/static/user/user_"+index+".png";
